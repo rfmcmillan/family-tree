@@ -1,5 +1,7 @@
 class FamilyTree {
-  constructor () {}
+  constructor() {
+    // test 1
+  }
 }
 
 module.exports = FamilyTree;
