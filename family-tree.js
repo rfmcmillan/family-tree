@@ -22,37 +22,30 @@ class FamilyTree {
   }
 
   findMember(member) {
-    let foundMember = this.children.filter((child) => {
-      return child.value === member;
-    });
-    if (foundMember.length > 0) {
-      return foundMember[0];
+    for (let i = 0; i < this.children.length; i++) {
+      let currChild = this.children[i];
+      if (member === currChild.value) {
+        return currChild;
+      }
     }
   }
 
   log() {
     let logArray = [];
-    let logText = '';
-    logText += `-- ${this.value}`;
+    logArray.push(`-- ${this.value}`);
+
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].children.length === 0) {
-        let childText = `
----- ${this.children[i].value}`;
-        logText += childText;
-      } else {
-        let childText = `
----- ${this.children[i].value}`;
-        logText += childText;
-        for (let j = 0; j < this.children[i].children.length; j++) {
-          let childText = `
------- ${this.children[i].children[j].value}`;
-          logText += childText;
+      let currChild = this.children[i];
+      logArray.push(`---- ${currChild.value}`);
+      if (currChild.children) {
+        for (let j = 0; j < currChild.children.length; j++) {
+          let currGrandchild = currChild.children[j];
+          logArray.push(`------ ${currGrandchild.value}`);
         }
       }
     }
-    logArray.push(logText);
-    console.log(logArray[0]);
-    return logArray[0];
+    console.log(logArray.join('\n'));
+    return logArray.join('\n');
   }
 }
 
